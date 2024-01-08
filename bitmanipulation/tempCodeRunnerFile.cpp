@@ -1,66 +1,48 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 int main(){
-    cout<<"enter the size of array"<<endl;
-    int n;
-    cin>>n;
-    cout<<"array"<<endl;
-    vector<int>v(n);
-    for(int i=0;i<n;i++){
-        cin>>v[i];
-    }
-    vector<vector<int>>bits(n,vector<int>(32));
-    for(int i=0;i<n;i++){
-        for(int j=0;j<32;j++){
-            bits[i][j]=(v[i]&(1<<j))?1:0;
-        }
-    }
-    // for(int i=0;i<n;i++){
-    //     for(int j=0;j<32;j++){
-    //         cout<<bits[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-    vector<vector<int>>pre_sum(n,vector<int>(32));
-    for(int i=0;i<n;i++){
-        for(int j=0;j<32;j++){
-            if(i==0){
-                pre_sum[i][j]=bits[i][j];
-            }
-            else{
-                pre_sum[i][j]=pre_sum[i-1][j]+bits[i][j];
+    long num;
+    cin>>num;
+    long pre=num%10;
+    num/=10;
+    long curr=num%10;
+    bool ans=true;
+    if(pre>curr){
+        bool flag=true;
+        while(num){
+            if(flag&&pre>curr){
+                pre=curr;
+                curr=num%10;
+                num/=10;
+            }else if(!flag&&curr>pre){
+                pre=curr;
+                curr=num%10;
+                num/=10;
+            }else{
+                ans=false;
+                curr=0;
             }
         }
-    }
-    // cout<<" ii"<<endl;
-    //   for(int i=0;i<n;i++){
-    //     for(int j=0;j<32;j++){
-    //         cout<<pre_sum[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
-    cout<<"enter the query"<<endl;
-    int q;
-    cin>>q;
-    while(q--){
-        int l,r;
-        cin>>l>>r;
-        int ans=0;
-        if(l==0){
-            for(int i=0;i<32;i++){
-                if(pre_sum[r][i]==r+1){
-                    ans=ans|(1<<i);
-                }
+    }else{
+        bool flag=true;
+        while(num){
+            if(flag&&curr>pre){
+                pre=curr;
+                curr=num%10;
+                num/=10;
+            }else if(!flag&&pre>curr){
+                pre=curr;
+                curr=num%10;
+                num/=10;
+            }else{
+                ans=false;
+                num=0;
             }
-        }else{
-            int len=r-l+1;
-            for(int i=0;i<32;i++){
-               if((pre_sum[r][i]-pre_sum[l-1][i])==len){
-                ans=ans|(1<<i);
-               }
-            }
-
         }
-        cout<<ans<<endl;
+    }
+    if(ans){
+        cout<<"Wave Number"<<endl;
+    }else{
+        cout<<"Not Wave Number"<<endl;
     }
 }
