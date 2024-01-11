@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "e:/OWL_CODER@T_HUB/bitmanipulation",
-      "program": "e:/OWL_CODER@T_HUB/bitmanipulation/build/Debug/outDebug",
+      "cwd": "e:/OWL_CODER@T_HUB",
+      "program": "e:/OWL_CODER@T_HUB/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
